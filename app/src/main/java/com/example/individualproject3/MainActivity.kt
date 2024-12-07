@@ -46,7 +46,7 @@ fun MainScreen() {
                 LoginScreen(navController)
             }
             composable("GameScreen") {
-                GameScreen(navController) // Pass NavController to GameScreen
+                GameScreen(navController)
             }
         }
     }
