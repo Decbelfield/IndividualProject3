@@ -3,19 +3,18 @@ package com.example.individualproject3
 import android.content.Context
 import androidx.room.*
 
-// Updated Entity to include a "role" or "isParent" flag
-@Entity(tableName = "users") // Renamed to "users" for broader usage
+@Entity(tableName = "users")
 data class User(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String,
     val email: String,
-    val passwordHash: String, // Consider using secure hashing
-    val isParent: Boolean // Added to distinguish user roles
+    val passwordHash: String,
+    val isParent: Boolean
 )
 
 @Dao
 interface UserDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE) // Allow updates
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(user: User)
 
     @Query("SELECT * FROM users WHERE email = :email AND passwordHash = :passwordHash")
@@ -52,8 +51,6 @@ object Database {
     fun initialize(context: Context) {
         database = AppDatabase.getDatabase(context)
     }
-
-    // Register user with "isParent" field
     suspend fun registerUser(name: String, email: String, passwordHash: String, isParent: Boolean): Boolean {
         val user = User(0, name, email, passwordHash, isParent)
         return try {

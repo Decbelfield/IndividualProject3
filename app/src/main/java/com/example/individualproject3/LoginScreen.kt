@@ -16,14 +16,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import com.example.individualproject3.R
-import com.example.individualproject3.Database
 import com.example.individualproject3.ui.theme.IndividualProject3Theme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-// Flag to temporarily bypass login verification
 var bypassLoginVerification = true
 
 @Composable
@@ -47,11 +44,9 @@ fun LoginScreen(navController: NavController, modifier: Modifier = Modifier) {
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly, verticalAlignment = Alignment.CenterVertically) {
             Button(onClick = {
-                // Bypass verification for now
                 if (bypassLoginVerification) {
                     navController.navigate("GameScreen")
                 } else {
-                    // Comment out the following lines to disable bypassing
                     loginParent(email.text, password.text) { success ->
                         if (success) {
                             navController.navigate("GameScreen")

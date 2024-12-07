@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
@@ -14,12 +13,9 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.individualproject3.ui.theme.IndividualProject3Theme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -82,12 +78,11 @@ fun RegistrationScreen(navController: NavController) {
             Button(onClick = {
                 if (isValidName(name.text) && isValidEmail(email.text) && isValidPassword(password.text)) {
                     if (isParent) {
-                        // Register as Parent
                         CoroutineScope(Dispatchers.IO).launch {
                             val result = Database.registerUser(
                                 name.text,
                                 email.text,
-                                password.text.hashCode().toString(), // Replace with a secure hash function
+                                password.text.hashCode().toString(),
                                 isParent
                             )
                             if (result) {
@@ -98,12 +93,11 @@ fun RegistrationScreen(navController: NavController) {
                             }
                         }
                     } else {
-                        // Register as Adult (if applicable, similar logic for adult registration)
                         CoroutineScope(Dispatchers.IO).launch {
                             val result = Database.registerUser(
                                 name.text,
                                 email.text,
-                                password.text.hashCode().toString(), // Replace with a secure hash function
+                                password.text.hashCode().toString(),
                                 isParent
                             )
                             if (result) {
